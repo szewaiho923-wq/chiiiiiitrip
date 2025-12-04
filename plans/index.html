@@ -10,7 +10,7 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2a6f5d">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="行程總覽">
+  <meta name="apple-mobile-web-app-title" content="chiiiiiitrip">
   <style>
     :root{--bg:#f7f9fb;--card:#fff;--accent:#2a6f5d;--muted:#6b7280;--radius:14px;--shadow:0 8px 24px rgba(16,24,40,0.06);--min-touch:48px;--tag-orange:#ff8a4b;--tag-green:#3ccf9b;--tag-blue:#5aa6ff}
     *{box-sizing:border-box}
@@ -21,8 +21,8 @@
     p.lead{margin:6px 0 12px;color:var(--muted);font-size:14px}
 
     /* 三個主按鈕 */
-    .selector{display:flex;gap:8px;margin:8px 0 18px}
-    .sel-btn{flex:1;min-height:var(--min-touch);border-radius:12px;border:0;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#06223a;cursor:pointer}
+    .selector{display:flex;gap:8px;margin:8px 0 18px;flex-wrap:wrap}
+    .sel-btn{flex:1;min-height:var(--min-touch);border-radius:12px;border:0;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#06223a;cursor:pointer;font-size:13px}
     .sel-btn[aria-pressed="true"]{background:var(--accent);color:#fff}
 
     /* 共用樣式 (日式極簡 卡片) */
@@ -34,18 +34,19 @@
 
     .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:12px}
     .thumb{width:100%;height:128px;border-radius:10px;background:#e7eef6;object-fit:cover}
+    h2{font-size:14px;margin:12px 0 8px;color:var(--accent);font-weight:700}
     h3{margin:6px 0 0;font-size:16px}
-    p{margin:8px 0;color:var(--muted);font-size:14px}
+    p{margin:8px 0;color:var(--muted);font-size:14px;line-height:1.5}
     .meta{font-size:13px;color:var(--muted)}
     .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .tag{padding:6px 8px;border-radius:10px;color:#fff;font-size:12px}
     .tag--food{background:var(--tag-orange)}.tag--menu{background:var(--tag-green)}.tag--souvenir{background:var(--tag-blue)}
 
     .actions{display:flex;gap:8px;margin-top:12px}
-    .btn{flex:1;min-height:44px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:800;cursor:pointer}
+    .btn{flex:1;min-height:44px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:800;cursor:pointer;font-size:14px}
     .small{background:#eef3f2;color:var(--accent)}
 
-    @media (max-width:420px){h1{font-size:16px}.thumb{height:98px}}
+    @media (max-width:420px){h1{font-size:16px}.thumb{height:98px}.sel-btn{font-size:12px}}
   </style>
 </head>
 <body>
@@ -54,123 +55,160 @@
       <img src="images/apple-touch-icon.png" alt="App Icon" aria-label="App Icon" style="width:40px;height:40px;border-radius:12px;box-shadow:0 2px 8px #0002;margin-right:10px;vertical-align:middle;" />
       <h1>chiiiiiitrip CHINA</h1>
     </header>
-    <p class="lead">三大精品行程·日式極簡體驗。選擇方案後，使用上方日期標籤切換每天行程。</p>
+    <p class="lead">5 天復活節高鐵遊·歷史深度解析版。選擇方案後，使用日期標籤切換每天行程。</p>
 
     <div class="selector" role="tablist" aria-label="選擇行程方案">
-      <button class="sel-btn" id="it-1-btn" aria-pressed="true">張家界 深度探索</button>
-      <button class="sel-btn" id="it-2-btn" aria-pressed="false">長沙＋武漢 文化漫遊</button>
-      <button class="sel-btn" id="it-3-btn" aria-pressed="false">景德鎮＋南昌 藝術之旅</button>
+      <button class="sel-btn" id="it-1-btn" aria-pressed="true">⛰️ 張家界深度探索</button>
+      <button class="sel-btn" id="it-2-btn" aria-pressed="false">🏯 長沙+武漢文化漫遊</button>
+      <button class="sel-btn" id="it-3-btn" aria-pressed="false">🎨 景德鎮+南昌藝術</button>
     </div>
 
     <!-- Itinerary 1: 張家界 -->
     <section id="it-1" class="panel" aria-hidden="false">
+      <div style="background:#fff3cd;padding:10px;border-radius:10px;margin-bottom:12px;font-size:13px">
+        <strong>總體辛苦Level：⭐⭐⭐⭐ (較高)</strong><br>
+        適合體力充沛、熱愛壯麗山景的父母。華住會推薦：武陵源或張家界市區的全季/桔子酒店。
+      </div>
       <div class="date-tabs" role="tablist" aria-label="張家界每日行程">
-        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+        <button class="tab" role="tab" aria-selected="true" data-day="1">Day 1</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">Day 2</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">Day 3</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
       <div class="day-content">
         <div class="day" data-day="1">
-          <article class="card" aria-label="Day1: 交通日">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>Day1 — 交通：深圳 → 張家界</h3>
-            <p class="meta">長途高鐵與轉車，建議預留充足休息時間。</p>
-            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps','_blank')">導航</button></div>
+          <article class="card">
+            <h3>Day 1: 交通日 — 深圳 → 張家界</h3>
+            <h2>武陵源休整活動</h2>
+            <p><strong>活動：</strong>深圳北高鐵 → 張家界西站。乘車前往武陵源景區周邊入住。</p>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 主要為長時間坐在高鐵上和轉車。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/張家界西站','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="2" style="display:none">
-          <article class="card" aria-label="Day2: 袁家界" data-highlights="必看:乾坤柱,優惠:門票 60-64 歲半價;65 歲免票">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>袁家界（哈利路亞山 / 乾坤柱）</h3>
-            <p>袁家界屬於武陵源核心景區，砂岩峰林地貌在 3.8 億年前由地殼抬升與流水侵蝕所形成。山峰奇形怪狀，其中著名的「乾坤柱」（哈利路亞山）為好萊塢電影《阿凡達》中懸浮山的原型；「天下第一橋」為兩座山峰之間天然形成的巨大石橋，景觀震撼。</p>
-            <p class="meta">人流：山頂核心觀景平台與百龍天梯排隊人潮多。建議穿舒適鞋並安排充裕休息。</p>
-            <div class="tags"><span class="tag tag--souvenir">乾坤柱</span><span class="tag tag--menu">百龍天梯（無長者優惠）</span></div>
+          <article class="card">
+            <h3>Day 2: 國家森林公園 — 袁家界 (阿凡達山)</h3>
+            <h2>景點背景與歷史</h2>
+            <p>袁家界屬於武陵源核心景區，砂岩峰林地貌在 3.8 億年前由地殼抬升、流水侵蝕和風化作用所形成，屬於「張家界地貌」的標準類型。山峰高聳入雲，奇形怪狀，被當地土家族人視為神靈棲息之地。</p>
+            <p>著名的「乾坤柱」（現已更名為哈利路亞山）是好萊塢電影《阿凡達》中懸浮山的原型，讓此地聞名全球。天下第一橋則是兩座山峰之間天然形成的巨大石橋，被讚譽為大自然的鬼斧神工。</p>
+            <h2>景區特色</h2>
+            <p>袁家界山頂區域是核心觀景平台，遊客眾多，人流密度高。百龍天梯周邊排隊時間長，是景區內最熱鬧的地方。</p>
+            <h2>優惠資訊</h2>
+            <p>60-64 歲：門票半價｜65 歲以上：免票<br>百龍天梯、索道：無長者優惠</p>
+            <p><strong>辛苦 Level：★★★ (中等)</strong> – 景區內步行量大，但道路平坦。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：乾坤柱、天下第一橋</span><span class="tag tag--menu">百龍天梯排隊長</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/袁家界','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="3" style="display:none">
-          <article class="card" aria-label="Day3: 天子山 & 金鞭溪" data-highlights="必看:金鞭溪">
-            <h3>天子山與金鞭溪</h3>
-            <p>天子山被譽為「峰林之王」，有御筆峰等著名景觀；金鞭溪兩岸奇峰對峙、水質清澈，溪谷平路徒步路線被稱為「山水畫廊」。金鞭溪徒步時間約 2.5 小時，對長者體能是考驗。</p>
-            <p class="meta">小提示：金鞭溪段相對幽靜，但天子山觀景台、索道站仍有人流集中，建議早點出發避開尖峰時間。</p>
-            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/金鞭溪','_blank')">導航</button></div>
+          <article class="card">
+            <h3>Day 3: 國家森林公園 — 天子山與金鞭溪</h3>
+            <h2>景點背景與歷史</h2>
+            <p>天子山被譽為「峰林之王」，相傳古代土家族首領向王天子曾在此與朝廷軍隊抗衡，景區內許多山峰都以土家族的歷史傳說命名。御筆峰是四座石柱如毛筆倒插，充滿浪漫想像。</p>
+            <p>山下的金鞭溪以其水質清澈、兩岸奇峰對峙而聞名，因溪邊一塊石峰形如古代兵器「金鞭」而得名，是罕見的峽谷平路徒步路線，被譽為「山水畫廊」。</p>
+            <h2>景區特色</h2>
+            <p>金鞭溪沿途相對幽靜，但天子山觀景台和索道站人流集中。</p>
+            <p><strong>辛苦 Level：★★★★ (較高)</strong> – 金鞭溪徒步約 2.5 小時，雖是平路，但對長者體能是考驗。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：御筆峰、金鞭溪</span></div>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/天子山','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="4" style="display:none">
-          <article class="card" aria-label="Day4: 天門山">
-            <h3>天門山（天門洞、玻璃棧道）</h3>
-            <p>天門山主峰高 1518.6 米，最標誌為天門洞——一個巨大的穿山溶洞，傳說在公元 263 年山壁忽然洞開。山頂的環山棧道與玻璃棧道沿懸崖修築，視野壯觀但對部分遊客具心理挑戰。</p>
-            <p class="meta">注意：索道與天門洞前廣場常有長時間排隊；若同行長者需評估心理接受度與行動能力。</p>
+          <article class="card">
+            <h3>Day 4: 天門山挑戰之旅</h3>
+            <h2>景點背景與歷史</h2>
+            <p>天門山是張家界海拔最高的山，主峰高 1518.6 米。最標誌性的天門洞是一個巨大的穿山溶洞，相傳在公元 263 年（三國時期吳王孫休在位時），山壁突然洞開，被視為吉兆，故名「天門」。</p>
+            <p>山頂的環山棧道和玻璃棧道則是在現代依懸崖峭壁修築，為遊客提供了驚險刺激的高空觀景體驗。</p>
+            <h2>景區特色</h2>
+            <p>索道排隊處和天門洞前廣場人山人海，山頂玻璃棧道更是遊客爭相拍照的熱點。</p>
+            <p><strong>辛苦 Level：★★★★ (較高)</strong> – 索道排隊耗時長，環山棧道多半山腰路段，挑戰體能和心理。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：天門洞、玻璃棧道</span><span class="tag tag--menu">排隊時間長</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/天門山','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="5" style="display:none">
-          <article class="card" aria-label="Day5: 返回深圳">
-            <h3>返回深圳</h3>
-            <p>乘高鐵返回，交通日。</p>
+          <article class="card">
+            <h3>Day 5: 張家界 → 深圳</h3>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 交通日。乘高鐵返回深圳。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/張家界西站','_blank')">導航</button></div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Itinerary 2: 長沙+武漢 (使用先前製作的設計) -->
+    <!-- Itinerary 2: 長沙+武漢 -->
     <section id="it-2" class="panel" aria-hidden="true">
+      <div style="background:#d4edda;padding:10px;border-radius:10px;margin-bottom:12px;font-size:13px">
+        <strong>總體辛苦Level：⭐⭐ (低)</strong><br>
+        適合喜歡歷史文化、追求輕鬆舒適的父母。華住會推薦：兩地市中心的美爵/施柏閣酒店。
+      </div>
       <div class="date-tabs" role="tablist" aria-label="長沙+武漢每日行程">
-        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+        <button class="tab" role="tab" aria-selected="true" data-day="1">Day 1</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">Day 2</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">Day 3</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
       <div class="day-content">
         <div class="day" data-day="1">
-          <article class="card" aria-label="Day1: 嶽麓書院" data-highlights="必看古蹟">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>嶽麓書院</h3>
-            <p>北宋書院，環境幽靜，步行輕鬆。</p>
+          <article class="card">
+            <h3>Day 1: 深圳 → 長沙，千年學府</h3>
+            <h2>景點：嶽麓書院</h2>
+            <p><strong>背景與歷史：</strong>嶽麓書院是中國古代四大書院之首，始建於北宋開寶九年（公元 976 年），經歷宋、元、明、清各代，弦歌不絕，被譽為「千年學府」。清末改為湖南高等學堂，後發展為湖南大學。</p>
+            <p>書院內至今保留著宋代遺留的講堂、半學齋等，體現了儒家教育的傳統。正門「惟楚有才，於斯為盛」的對聯，更是湖湘文化精神的集中體現。</p>
+            <h2>景區特色</h2>
+            <p>書院內環境幽靜古樸，但周邊的湖南大學校區則充滿青春氣息，人氣旺盛。</p>
+            <p><strong>辛苦 Level：★ (低)</strong> – 景區面積不大，步行輕鬆。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：講堂、對聯</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/嶽麓書院','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="2" style="display:none">
-          <article class="card" aria-label="Day2: 湖南省博物館" data-highlights="必看:馬王堆">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>湖南省博物館（馬王堆）</h3>
-            <p>湖南省博物館以收藏馬王堆漢墓的珍貴文物而聞名，出土文物完整且保存良好，能深入了解西漢時期的生活與禮儀。參觀多為室內展館，可能需要較長時間站立與行走。</p>
-            <p class="meta">建議：安排坐休息與緩慢行程節奏，避免長時間連續站立。</p>
+          <article class="card">
+            <h3>Day 2: 長沙博物館與橘洲詩意 → 武漢</h3>
+            <h2>景點：湖南省博物館與橘子洲頭</h2>
+            <p><strong>背景與歷史：</strong>湖南省博物館以收藏西漢長沙國丞相利蒼及其妻辛追夫人的馬王堆漢墓文物而舉世聞名。出土的辛追夫人濕屍、素紗襌衣等，是研究西漢文明的珍貴史料。</p>
+            <p>橘子洲頭是湘江中的一個沖積沙洲，因毛澤東青年時代在此遊覽並寫下著名的《沁園春·長沙》而成為近代史的標誌性景點。</p>
+            <h2>景區特色</h2>
+            <p>博物館內參觀人流大，橘子洲頭的毛澤東青年藝術雕塑區域遊客集中。</p>
+            <p><strong>活動：</strong>下午乘高鐵前往武漢。</p>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 博物館室內長時間站立參觀，橘子洲需搭乘觀光車。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：馬王堆文物、毛澤東雕塑</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/湖南省博物館','_blank')">導航</button></div>
-          </article>
-          <article class="card" aria-label="Day2: 橘子洲頭">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>橘子洲頭</h3>
-            <p>橘子洲頭因毛澤東早年在此揮毫並寫下《沁園春·長沙》而成名，河岸綠地與雕塑區常聚集遊客與市民，景色富詩意。</p>
-            <p class="meta">建議：若同行長者不便長時間行走，考慮搭乘觀光車或分段漫步。</p>
-            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/橘子洲頭','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="3" style="display:none">
-          <article class="card" aria-label="Day3: 黃鶴樓">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>黃鶴樓</h3>
-            <p>黃鶴樓是江南三大名樓之一，始建於三國時期，因唐代詩人崔顥的詩句而聲名遠播。現存建築為 1980 年代重建，保留古典風格並為欣賞長江景致的制高點。</p>
-            <p class="meta">注意：登樓需爬樓梯；景區有休息平台與電梯可供較不便旅客使用。</p>
+          <article class="card">
+            <h3>Day 3: 武漢 — 黃鶴樓與江灘風情</h3>
+            <h2>景點：黃鶴樓與長江江灘</h2>
+            <p><strong>背景與歷史：</strong>黃鶴樓始建於三國時期，是「江南三大名樓」之首，歷史上屢毀屢建。它因唐代詩人崔顥的「昔人已乘黃鶴去，此地空餘黃鶴樓」詩句而聲名鵲起。</p>
+            <p>現存建築重建於 1980 年代，保留了清代同治年間的風格。它位於武漢的制高點，俯瞰滔滔長江。</p>
+            <h2>景區特色</h2>
+            <p>黃鶴樓周邊是武漢的核心旅遊區，遊客眾多。長江江灘則是武漢市民夜晚休閒的鬧市區。</p>
+            <p><strong>辛苦 Level：★★★ (中等)</strong> – 登黃鶴樓需要攀爬樓梯，但有休息平台和電梯。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：黃鶴樓、江灘風景</span><span class="tag tag--menu">有電梯代步</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/黃鶴樓','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="4" style="display:none">
-          <article class="card" aria-label="Day4: 湖北省博物館">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>湖北省博物館（曾侯乙編鐘）</h3>
-            <p>湖北省博物館收藏大量古楚文化遺物，其中曾侯乙編鐘為重要亮點，為世界上保存最完整的大型青銅樂器之一。博物館展品豐富，適合喜歡歷史文化的旅客。</p>
-            <p class="meta">建議：博物館內人流可能集中，東湖可以選擇環湖觀光車以減少步行負擔。</p>
+          <article class="card">
+            <h3>Day 4: 武漢 — 楚文化與東湖閒情</h3>
+            <h2>景點：湖北省博物館與東湖</h2>
+            <p><strong>背景與歷史：</strong>湖北省博物館以收藏古楚文化瑰寶為主。最著名的展品是戰國時期曾國君主墓中出土的曾侯乙編鐘（距今約 2400 多年），是世界上最完整、最大的青銅樂器，見證了楚文化在春秋戰國時期的輝煌。</p>
+            <p>東湖是中國最大的城中湖，風景區環境優美。</p>
+            <h2>景區特色</h2>
+            <p>博物館內人流集中，東湖環湖區域遊人較多，適合戶外休閒。</p>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 博物館室內參觀，東湖可乘觀光車代步。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：曾侯乙編鐘</span><span class="tag tag--menu">東湖觀光車</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/湖北省博物館','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="5" style="display:none">
-          <article class="card" aria-label="Day5: 返回深圳">
-            <h3>返回深圳</h3>
-            <p>乘高鐵返回，交通日。</p>
+          <article class="card">
+            <h3>Day 5: 武漢 → 深圳</h3>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 交通日。乘高鐵返回深圳。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/武漢站','_blank')">導航</button></div>
           </article>
         </div>
       </div>
@@ -178,49 +216,83 @@
 
     <!-- Itinerary 3: 景德鎮+南昌 -->
     <section id="it-3" class="panel" aria-hidden="true">
+      <div style="background:#cfe2ff;padding:10px;border-radius:10px;margin-bottom:12px;font-size:13px">
+        <strong>總體辛苦Level：⭐⭐ (低)</strong><br>
+        適合喜歡藝術工藝、博物館、追求悠閒的父母。華住會推薦：南昌/景德鎮市區全季/桔子酒店。
+      </div>
       <div class="date-tabs" role="tablist" aria-label="景德鎮+南昌每日行程">
-        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+        <button class="tab" role="tab" aria-selected="true" data-day="1">Day 1</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">Day 2</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">Day 3</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
       <div class="day-content">
         <div class="day" data-day="1">
-          <article class="card" aria-label="Day1: 滕王閣" data-highlights="必看:滕王閣">
-            <div class="thumb" aria-hidden="true"></div>
-            <h3>滕王閣</h3>
-            <p>滕王閣最早建於唐朝永徽四年（公元 653 年），因王勃《滕王閣序》而名垂千古。現存建築依宋代樣式重建，位於贛江邊，風景與文化氣息濃厚。</p>
-            <p class="meta">建議：安排緩步登樓並在觀景平台休息，注意人流高峰時段。</p>
+          <article class="card">
+            <h3>Day 1: 深圳 → 南昌，滕王閣歷史名樓</h3>
+            <h2>景點：滕王閣</h2>
+            <p><strong>背景與歷史：</strong>滕王閣最早建於唐朝永徽四年（公元 653 年），由唐太宗李世民的弟弟李元嬰（曾被封為滕王）所建。它因唐代詩人王勃的《滕王閣序》中「落霞與孤鶩齊飛，秋水共長天一色」的名句而千古流芳。</p>
+            <p>滕王閣歷史上屢毀屢建 29 次，現在的建築是根據宋朝的樣式重建，保留了古代樓閣的雄偉氣派。</p>
+            <h2>景區特色</h2>
+            <p>滕王閣景區位於贛江邊，是南昌的核心景點，遊客集中。</p>
+            <p><strong>辛苦 Level：★★★ (中等)</strong> – 登樓需體力，但可利用電梯。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：滕王閣、贛江景色</span><span class="tag tag--menu">有電梯代步</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/滕王閣','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="2" style="display:none">
-          <article class="card" aria-label="Day2: 陶溪川" data-highlights="必買:手作陶瓷">
-            <h3>陶溪川文創街區</h3>
-            <p>陶溪川由 1950 年代的宇宙瓷廠改造而成，現為文創聚落，匯集年輕陶藝家與手作市集。每週末夜市活力十足，是觀賞與購買手作的好去處。</p>
-            <div class="tags"><span class="tag tag--souvenir">必買伴手禮</span></div>
+          <article class="card">
+            <h3>Day 2: 南昌 → 景德鎮，陶藝初體驗</h3>
+            <h2>活動</h2>
+            <p><strong>上午：</strong>參觀八一南昌起義紀念館（紅色文化）。</p>
+            <p><strong>中午：</strong>乘高鐵前往景德鎮北站。</p>
+            <h2>景點：陶溪川文創街區</h2>
+            <p><strong>背景與歷史：</strong>景德鎮是世界公認的「瓷都」，制瓷歷史可追溯至漢代，宋代因瓷器品質極高而以年號「景德」命名。陶溪川前身是建於 1950 年代的宇宙瓷廠，是新中國陶瓷工業的縮影。現在改造成為融合工業遺產和現代藝術的文創區，集結了大量年輕陶藝家。</p>
+            <h2>景區特色</h2>
+            <p>每週末的陶溪川夜市是年輕藝術家擺攤的盛會，非常熱鬧。</p>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 步行參觀為主，強度低。</p>
+            <div class="tags"><span class="tag tag--souvenir">必買：手作陶瓷</span><span class="tag tag--food">夜市美食</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/陶溪川','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="3" style="display:none">
-          <article class="card" aria-label="Day3: 古窯博覽區">
-            <h3>景德鎮古窯民俗博覽區</h3>
-            <p>古窯區保留清代鎮窯、明代葫蘆窯等歷代窯爐，展示完整的製瓷流程，從揉泥、拉坯到燒製都能近距離觀察，是體驗「活著的陶瓷歷史」的最佳場所。</p>
+          <article class="card">
+            <h3>Day 3: 景德鎮 — 陶瓷博物館與古窯</h3>
+            <h2>景點</h2>
+            <p><strong>上午：</strong>景德鎮中國陶瓷博物館<br>
+            <strong>下午：</strong>景德鎮古窯民俗博覽區</p>
+            <p><strong>背景與歷史：</strong>陶瓷博物館系統展示了從新石器時代到現代的陶瓷歷史與技術。古窯民俗博覽區集中展示了歷代瓷窯作坊和傳統製瓷工藝。</p>
+            <p>這裡保留了清代鎮窯、明代葫蘆窯等古代窯爐，能讓父母親眼看到從揉泥、拉坯到燒製的完整過程，是「活著的陶瓷歷史」。</p>
+            <h2>景區特色</h2>
+            <p>古窯區有許多手工作坊，遊客可近距離觀看製作過程。</p>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 室內參觀輕鬆，古窯民俗區步行較多，但多平路。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：古窯、製瓷工藝</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/景德鎮古窯','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="4" style="display:none">
-          <article class="card" aria-label="Day4: 江西省博物館">
-            <h3>江西省博物館</h3>
-            <p>江西省博物館收藏大量地方文物，呈現江西在歷史長河中的文化與地位。南昌在近代史上有特殊意義，如八一南昌起義的歷史紀念，博物館適合安排半日深入參觀。</p>
+          <article class="card">
+            <h3>Day 4: 景德鎮 → 南昌，江西省博物館</h3>
+            <h2>活動</h2>
+            <p><strong>上午：</strong>參觀景德鎮的雕塑瓷廠。<br>
+            <strong>中午：</strong>乘高鐵返回南昌。<br>
+            <strong>下午：</strong>江西省博物館</p>
+            <h2>景點：江西省博物館</h2>
+            <p><strong>背景與歷史：</strong>江西省博物館收藏了大量江西地方歷史文物，包括古代青銅器、陶瓷器等，反映了江西在歷史長河中的重要地位。</p>
+            <p>南昌在近代史上也有特殊意義，著名的八一南昌起義（1927 年）標誌著中國共產黨獨立領導武裝鬥爭的開始。</p>
+            <h2>景區特色</h2>
+            <p>博物館位於南昌市區，周邊交通便利。</p>
+            <p><strong>辛苦 Level：★ (低)</strong> – 參觀博物館為主，室內活動，強度低。</p>
+            <div class="tags"><span class="tag tag--souvenir">必看：古代文物、起義紀念</span></div>
             <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/江西省博物館','_blank')">導航</button></div>
           </article>
         </div>
         <div class="day" data-day="5" style="display:none">
-          <article class="card" aria-label="Day5: 返回深圳">
-            <h3>返回深圳</h3>
-            <p>乘高鐵返回，交通日。</p>
+          <article class="card">
+            <h3>Day 5: 南昌 → 深圳</h3>
+            <p><strong>辛苦 Level：★★ (中低)</strong> – 交通日。乘高鐵返回深圳。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/南昌站','_blank')">導航</button></div>
           </article>
         </div>
       </div>
@@ -259,25 +331,6 @@
             if(e.key==='ArrowRight') tabs[(idx+1)%tabs.length].click();
             if(e.key==='ArrowLeft') tabs[(idx-1+tabs.length)%tabs.length].click();
           });
-        });
-      });
-    })();
-
-    // Auto-generate tag highlights from data-highlights
-    (function(){
-      document.querySelectorAll('[data-highlights]').forEach(el=>{
-        const parent = el;
-        const data = parent.getAttribute('data-highlights');
-        if(!data) return;
-        const container = parent.querySelector('.tags') || (function(){const d=document.createElement('div');d.className='tags';parent.appendChild(d);return d;})();
-        data.split(',').map(s=>s.trim()).filter(Boolean).forEach(token=>{
-          const span = document.createElement('span');
-          span.className='tag';
-          if(/必吃|美食|吃/.test(token)) span.classList.add('tag--food');
-          else if(/必點|菜單|菜/.test(token)) span.classList.add('tag--menu');
-          else span.classList.add('tag--souvenir');
-          span.textContent = token;
-          container.appendChild(span);
         });
       });
     })();
