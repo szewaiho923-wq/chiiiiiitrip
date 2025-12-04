@@ -15,9 +15,10 @@
     *{box-sizing:border-box}
     body{margin:0;font-family: -apple-system, BlinkMacSystemFont,'微軟正黑體','Segoe UI',Roboto,Arial;background:var(--bg);color:#071133;-webkit-font-smoothing:antialiased}
     .wrap{max-width:820px;margin:0 auto;padding:16px}
-    header{display:flex;align-items:center;gap:12px}
+    header{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:20px}
+    header img{width:96px;height:96px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
     h1{font-size:24px;margin:0;color:var(--accent);font-weight:700}
-    p.lead{margin:8px 0 12px;color:var(--muted);font-size:16px;line-height:1.6}
+    p.lead{margin:8px 0 12px;color:var(--muted);font-size:16px;line-height:1.6;text-align:center}
 
     .selector{display:flex;gap:8px;margin:12px 0 20px;flex-wrap:wrap}
     .sel-btn{flex:1;min-height:var(--min-touch);border-radius:12px;border:0;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#06223a;cursor:pointer;font-size:15px;padding:12px}
@@ -25,11 +26,15 @@
 
     .panel{display:none}
     .panel[aria-hidden="false"]{display:block}
-    .date-tabs{display:flex;gap:8px;overflow:auto;padding:8px 0;margin:12px 0}
-    .tab{flex:0 0 auto;padding:10px 14px;border-radius:999px;background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer;font-size:14px}
+    
+    .tab-group{margin:12px 0 16px}
+    .tab-group-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
+    .date-tabs{display:flex;gap:8px;overflow:auto;padding:8px 0;margin:0}
+    .tab{flex:0 0 auto;padding:10px 14px;border-radius:999px;background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap}
     .tab[aria-selected="true"]{background:var(--card);box-shadow:var(--shadow);color:var(--accent)}
 
     .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+    .card img{width:100%;height:auto;border-radius:12px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
     .emoji{font-size:28px;margin-right:8px}
     h2{font-size:18px;margin:12px 0 10px;color:var(--accent);font-weight:700}
     h3{margin:10px 0 8px;font-size:20px;font-weight:700;color:#071133}
@@ -42,6 +47,9 @@
 
     .note{background:#fffacd;border-left:4px solid var(--tag-orange);padding:12px;margin:12px 0;border-radius:6px;font-size:15px}
     .note strong{color:var(--tag-orange)}
+    
+    .budget-item{background:#f0f7ff;border-left:4px solid var(--tag-blue);padding:12px;margin:12px 0;border-radius:6px;font-size:15px}
+    .transport-item{background:#fff5e6;border-left:4px solid var(--tag-orange);padding:12px;margin:12px 0;border-radius:6px;font-size:15px}
 
     @media (max-width:420px){h1{font-size:20px}h3{font-size:18px}p{font-size:15px}.emoji{font-size:22px}h3 .emoji{font-size:20px}}
   </style>
@@ -74,6 +82,13 @@
         <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
         <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
+      <div class="tab-group">
+        <div class="tab-group-label">📋 分類導覽</div>
+        <div class="date-tabs" role="tablist" aria-label="張家界行程分類">
+          <button class="tab" role="tab" aria-selected="true" data-view="itinerary">行程詳情</button>
+          <button class="tab" role="tab" aria-selected="false" data-view="transport">🚄 交通 & 預算</button>
+        </div>
+      </div>
       <div class="day-content">
         <div class="day" data-day="1">
           <article class="card">
@@ -89,6 +104,7 @@
         <div class="day" data-day="2" style="display:none">
           <article class="card">
             <h3><span class="emoji">⛰️</span>Day 2：袁家界 (阿凡達山)</h3>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="袁家界風景">
             <h2>景點：袁家界景區（哈利路亞山、天下第一橋）</h2>
             <p><strong>背景與歷史：</strong>袁家界屬於武陵源核心景區，砂岩峰林地貌在 3.8 億年前由地殼抬升、流水侵蝕所形成。著名的「乾坤柱」（哈利路亞山）是電影《阿凡達》中懸浮山的原型。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -102,6 +118,7 @@
         <div class="day" data-day="3" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏔️</span>Day 3：天子山 與 金鞭溪</h3>
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80" alt="天子山風景">
             <h2>景點：天子山景區（御筆峰）與金鞭溪</h2>
             <p><strong>背景與歷史：</strong>天子山相傳古代土家族首領向王天子曾在此抗衡，景區內許多山峰都以土家族的歷史傳說命名。山下的金鞭溪以其水質清澈、兩岸奇峰對峙而聞名，是峽谷平路徒步的經典路線。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -113,6 +130,7 @@
         <div class="day" data-day="4" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏔️</span>Day 4：天門山挑戰之旅</h3>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="天門山風景">
             <h2>景點：天門山國家森林公園（天門洞、玻璃棧道）</h2>
             <p><strong>背景與歷史：</strong>天門山海拔最高，最標誌性的天門洞是一個巨大的穿山溶洞，相傳在公元 263 年（三國時期）山壁突然洞開，被視為吉兆。山頂的環山棧道和玻璃棧道提供了驚險刺激的高空觀景體驗。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -128,6 +146,71 @@
             <h3><span class="emoji">🚄</span>Day 5：張家界 → 深圳</h3>
             <p class="meta"><strong>辛苦 Level：★★ (中低)</strong> – 交通日。</p>
           </article>
+        </div>
+      </div>
+      
+      <!-- 張家界 交通 & 預算 -->
+      <div class="transport-section" data-itinerary="it-1" style="display:none">
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🚄 高鐵班次建議</h2>
+        <div class="transport-item">
+          <strong>去程：深圳北 → 張家界西</strong><br>
+          推薦班次：G6080、G6086 等直達班次<br>
+          行車時間：約 6 小時 30 分鐘<br>
+          出發時間：早上 08:00-09:00<br>
+          票價參考：約 ¥600-¥800 元（二等座全價）<br>
+          💡 提示：班次較少，建議提早預訂。使用華住會會員優惠可享折扣。
+        </div>
+        <div class="transport-item">
+          <strong>回程：張家界西 → 深圳北</strong><br>
+          推薦班次：G6085、G6089 等直達班次<br>
+          行車時間：約 6 小時 40 分鐘<br>
+          票價參考：約 ¥600-¥800 元（二等座全價）
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">💰 完整預算估算 (3人 5天 4晚)</h2>
+        <div class="budget-item">
+          <strong>總體預算估算：約 ¥9,000-¥11,000 元</strong>
+        </div>
+        <div class="budget-item">
+          <strong>🚄 交通費用：¥3,600-¥4,000 元</strong><br>
+          • 高鐵往返（3人）：¥3,600-¥4,000 元
+        </div>
+        <div class="budget-item">
+          <strong>🎫 門票及代步工具：¥2,500-¥3,000 元</strong><br>
+          • 武陵源森林公園：父母免票，女兒全價 ¥225 元<br>
+          • 天門山景區：父母免票，女兒全價 ¥258 元<br>
+          • 百龍天梯（上下）：¥192×3人 = ¥576 元<br>
+          • 天門山索道（往返）：¥68×3人 = ¥204 元<br>
+          • 其他山路電梯/穿山電梯：¥400-¥600 元<br>
+          • 小交通（景區內）：¥200-¥300 元
+        </div>
+        <div class="budget-item">
+          <strong>🏨 住宿費用 (4晚)：¥1,800-¥2,200 元</strong><br>
+          • 武陵源全季/桔子酒店 (3晚)：¥450-550 元/間 × 2間 = ¥2,700-3,300 元<br>
+          • 張家界市區全季/美居酒店 (1晚)：¥400-500 元/間 × 2間 = ¥800-1,000 元<br>
+          💡 華住會會員：享受會員價優惠 10-20%
+        </div>
+        <div class="budget-item">
+          <strong>🍽️ 餐飲費用 (5天)：¥2,250-¥3,000 元</strong><br>
+          • 每人每日：¥150-¥200 元<br>
+          • 3人 × 5天 = ¥2,250-¥3,000 元<br>
+          • 包括：早餐、午餐、晚餐 + 特色美食體驗
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🏨 華住會酒店推薦</h2>
+        <div class="note">
+          <strong>武陵源區 (3晚)</strong><br>
+          推薦：全季酒店（武陵源店）或桔子酒店（武陵源店）<br>
+          原因：靠近武陵源門票站，方便 Day 2-3 早抵達景區<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥450-550 元/間
+        </div>
+        <div class="note">
+          <strong>張家界市區/天門山 (1晚)</strong><br>
+          推薦：全季酒店（天門山店）或美居酒店（中心店）<br>
+          原因：方便 Day 5 早上前往張家界西站乘高鐵<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥400-500 元/間
         </div>
       </div>
     </section>
@@ -146,10 +229,18 @@
         <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
         <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
+      <div class="tab-group">
+        <div class="tab-group-label">📋 分類導覽</div>
+        <div class="date-tabs" role="tablist" aria-label="長沙+武漢行程分類">
+          <button class="tab" role="tab" aria-selected="true" data-view="itinerary">行程詳情</button>
+          <button class="tab" role="tab" aria-selected="false" data-view="transport">🚄 交通 & 預算</button>
+        </div>
+      </div>
       <div class="day-content">
         <div class="day" data-day="1">
           <article class="card">
             <h3><span class="emoji">📚</span>Day 1：深圳 → 長沙，千年學府</h3>
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="嶽麓書院">
             <h2>景點：嶽麓書院</h2>
             <p><strong>背景與歷史：</strong>嶽麓書院始建於北宋開寶九年（公元 976 年），是「千年學府」。「惟楚有才，於斯為盛」的對聯是湖湘文化精神的集中體現。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -163,6 +254,7 @@
         <div class="day" data-day="2" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏛️</span>Day 2：長沙博物館 與 橘洲詩意 → 武漢</h3>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="橘子洲頭">
             <h2>景點：湖南省博物館 與 橘子洲頭</h2>
             <p><strong>背景與歷史：</strong>博物館以收藏西漢馬王堆漢墓文物而舉世聞名。橘子洲頭因毛澤東詞作而成為近代史的標誌性景點。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -174,6 +266,7 @@
         <div class="day" data-day="3" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏯</span>Day 3：武漢 黃鶴樓 與 江灘風情</h3>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="黃鶴樓">
             <h2>景點：黃鶴樓 與 長江江灘</h2>
             <p><strong>背景與歷史：</strong>黃鶴樓始建於三國時期，是「江南三大名樓」之首。因唐代詩人崔顥的詩句而千古流芳。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -187,6 +280,7 @@
         <div class="day" data-day="4" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏛️</span>Day 4：武漢 楚文化 與 東湖閒情</h3>
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80" alt="東湖景色">
             <h2>景點：湖北省博物館 與 東湖</h2>
             <p><strong>背景與歷史：</strong>博物館以收藏古楚文化瑰寶和曾侯乙編鐘為主。東湖是中國最大的城中湖。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -200,6 +294,79 @@
             <h3><span class="emoji">🚄</span>Day 5：武漢 → 深圳</h3>
             <p class="meta"><strong>辛苦 Level：★★ (中低)</strong> – 交通日。</p>
           </article>
+        </div>
+      </div>
+      
+      <!-- 長沙+武漢 交通 & 預算 -->
+      <div class="transport-section" data-itinerary="it-2" style="display:none">
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🚄 高鐵班次建議</h2>
+        <div class="transport-item">
+          <strong>Day 1 (去程)：深圳北 → 長沙南</strong><br>
+          推薦班次：G/D 字頭班次<br>
+          行車時間：約 3 小時 20 分鐘<br>
+          票價參考：約 ¥350-500 元（二等座全價）<br>
+          班次眾多，選擇彈性大。
+        </div>
+        <div class="transport-item">
+          <strong>Day 2 (城際)：長沙南 → 武漢站</strong><br>
+          推薦班次：G/D 字頭班次<br>
+          行車時間：約 1 小時 30 分鐘<br>
+          票價參考：約 ¥120-180 元（二等座全價）
+        </div>
+        <div class="transport-item">
+          <strong>Day 5 (回程)：武漢站 → 深圳北</strong><br>
+          推薦班次：G/D 字頭班次<br>
+          行車時間：約 4 小時 30 分鐘<br>
+          票價參考：約 ¥500-700 元（二等座全價）
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">💰 完整預算估算 (3人 5天 4晚)</h2>
+        <div class="budget-item">
+          <strong>總體預算估算：約 ¥7,000-¥9,000 元</strong>
+        </div>
+        <div class="budget-item">
+          <strong>🚄 交通費用：¥3,500-¥4,000 元</strong><br>
+          • 深圳→長沙：¥1,000-¥1,500 元<br>
+          • 長沙→武漢：¥400-¥500 元<br>
+          • 武漢→深圳：¥1,500-¥2,000 元
+        </div>
+        <div class="budget-item">
+          <strong>🎫 門票費用：¥800-¥1,200 元</strong><br>
+          • 嶽麓書院：¥50-70 元/人<br>
+          • 湖南省博物館：免費<br>
+          • 橘子洲觀光車：¥25-30 元/人<br>
+          • 黃鶴樓：¥70-80 元/人<br>
+          • 湖北省博物館：免費<br>
+          • 東湖遊船/觀光車：¥30-50 元/人<br>
+          • 小交通及其他：¥200-300 元
+        </div>
+        <div class="budget-item">
+          <strong>🏨 住宿費用 (4晚)：¥1,800-¥2,200 元</strong><br>
+          • 長沙全季/美爵酒店 (2晚)：¥450-550 元/間<br>
+          • 武漢全季/施柏閣酒店 (2晚)：¥450-550 元/間<br>
+          💡 華住會會員：享受會員價優惠 10-20%
+        </div>
+        <div class="budget-item">
+          <strong>🍽️ 餐飲費用 (5天)：¥2,250-¥3,000 元</strong><br>
+          • 每人每日：¥150-¥200 元<br>
+          • 3人 × 5天 = ¥2,250-¥3,000 元<br>
+          • 包括：早餐、午餐、晚餐 + 特色美食體驗
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🏨 華住會酒店推薦</h2>
+        <div class="note">
+          <strong>長沙市中心 (2晚)</strong><br>
+          推薦：美爵酒店（解放西路店）或全季酒店（五一廣場店）<br>
+          原因：靠近五一廣場、坡子街等美食鬧市區<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥450-550 元/間
+        </div>
+        <div class="note">
+          <strong>武漢市中心 (2晚)</strong><br>
+          推薦：施柏閣酒店（黃鶴樓店）或全季酒店（江灘店）<br>
+          原因：靠近黃鶴樓、長江江灘，交通便利<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥450-550 元/間
         </div>
       </div>
     </section>
@@ -218,10 +385,18 @@
         <button class="tab" role="tab" aria-selected="false" data-day="4">Day 4</button>
         <button class="tab" role="tab" aria-selected="false" data-day="5">Day 5</button>
       </div>
+      <div class="tab-group">
+        <div class="tab-group-label">📋 分類導覽</div>
+        <div class="date-tabs" role="tablist" aria-label="景德鎮+南昌行程分類">
+          <button class="tab" role="tab" aria-selected="true" data-view="itinerary">行程詳情</button>
+          <button class="tab" role="tab" aria-selected="false" data-view="transport">🚄 交通 & 預算</button>
+        </div>
+      </div>
       <div class="day-content">
         <div class="day" data-day="1">
           <article class="card">
             <h3><span class="emoji">🏯</span>Day 1：深圳 → 南昌，滕王閣歷史名樓</h3>
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" alt="滕王閣">
             <h2>景點：滕王閣</h2>
             <p><strong>背景與歷史：</strong>滕王閣最早建於唐朝永徽四年（公元 653 年），因唐代詩人王勃的《滕王閣序》而千古流芳。</p>
             <h2>🏙️ 鬧市特色</h2>
@@ -235,6 +410,7 @@
         <div class="day" data-day="2" style="display:none">
           <article class="card">
             <h3><span class="emoji">🎨</span>Day 2：南昌 → 景德鎮，陶藝初體驗</h3>
+            <img src="https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=800&q=80" alt="景德鎮陶瓷">
             <h2>活動</h2>
             <p><strong>上午：</strong>參觀八一南昌起義紀念館。<br><strong>中午：</strong>乘高鐵前往景德鎮北站。</p>
             <h2>景點：陶溪川文創街區</h2>
@@ -248,6 +424,7 @@
         <div class="day" data-day="3" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏺</span>Day 3：景德鎮 陶瓷博物館 與 古窯</h3>
+            <img src="https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=800&q=80" alt="景德鎮古窯">
             <h2>景點</h2>
             <p><strong>上午：</strong>景德鎮中國陶瓷博物館<br><strong>下午：</strong>景德鎮古窯民俗博覽區</p>
             <p><strong>背景與歷史：</strong>古窯民俗博覽區集中展示了歷代瓷窯作坊和傳統製瓷工藝。這裡保留了清代鎮窯等古代窯爐，能讓父母親眼看到「活著的陶瓷歷史」。</p>
@@ -262,6 +439,7 @@
         <div class="day" data-day="4" style="display:none">
           <article class="card">
             <h3><span class="emoji">🏛️</span>Day 4：景德鎮 → 南昌，江西省博物館</h3>
+            <img src="https://images.unsplash.com/photo-1509391366360-2e938d440220?w=800&q=80" alt="江西博物館">
             <h2>活動</h2>
             <p><strong>上午：</strong>參觀景德鎮的雕塑瓷廠。<br><strong>中午：</strong>乘高鐵返回南昌。<br><strong>下午：</strong>江西省博物館。</p>
             <h2>景點背景與歷史</h2>
@@ -277,6 +455,93 @@
             <h3><span class="emoji">🚄</span>Day 5：南昌 → 深圳</h3>
             <p class="meta"><strong>辛苦 Level：★★ (中低)</strong> – 交通日。</p>
           </article>
+        </div>
+      </div>
+      
+      <!-- 景德鎮+南昌 交通 & 預算 -->
+      <div class="transport-section" data-itinerary="it-3" style="display:none">
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🚄 高鐵班次建議</h2>
+        <div class="transport-item">
+          <strong>Day 1 (去程)：深圳北 → 南昌西</strong><br>
+          推薦班次：G 字頭班次<br>
+          行車時間：約 5 小時 30 分鐘<br>
+          票價參考：約 ¥550-750 元（二等座全價）
+        </div>
+        <div class="transport-item">
+          <strong>Day 2 (城際)：南昌西 → 景德鎮北</strong><br>
+          推薦班次：G 字頭班次<br>
+          行車時間：約 1 小時 30 分鐘<br>
+          票價參考：約 ¥100-150 元（二等座全價）
+        </div>
+        <div class="transport-item">
+          <strong>Day 4 (城際)：景德鎮北 → 南昌西</strong><br>
+          推薦班次：G 字頭班次<br>
+          行車時間：約 1 小時 30 分鐘<br>
+          票價參考：約 ¥100-150 元（二等座全價）
+        </div>
+        <div class="transport-item">
+          <strong>Day 5 (回程)：南昌西 → 深圳北</strong><br>
+          推薦班次：G 字頭班次<br>
+          行車時間：約 5 小時 30 分鐘<br>
+          票價參考：約 ¥550-750 元（二等座全價）<br>
+          💡 提示：務必確認所有車票都選擇南昌西站，方便轉乘。
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">💰 完整預算估算 (3人 5天 4晚)</h2>
+        <div class="budget-item">
+          <strong>總體預算估算：約 ¥7,500-¥9,500 元</strong>
+        </div>
+        <div class="budget-item">
+          <strong>🚄 交通費用：¥3,800-¥4,300 元</strong><br>
+          • 深圳→南昌：¥1,600-¥2,250 元<br>
+          • 南昌→景德鎮：¥300-¥450 元<br>
+          • 景德鎮→南昌：¥300-¥450 元<br>
+          • 南昌→深圳：¥1,600-¥2,250 元
+        </div>
+        <div class="budget-item">
+          <strong>🎫 門票費用：¥1,200-¥1,600 元</strong><br>
+          • 滕王閣：¥50 元/人<br>
+          • 八一南昌起義紀念館：免費<br>
+          • 景德鎮中國陶瓷博物館：¥80 元/人<br>
+          • 古窯民俗博覽區：¥100 元/人<br>
+          • 江西省博物館：免費<br>
+          • 小交通及其他：¥200-400 元
+        </div>
+        <div class="budget-item">
+          <strong>🏨 住宿費用 (4晚)：¥1,700-¥2,100 元</strong><br>
+          • 南昌全季酒店 (1晚)：¥425-525 元/間<br>
+          • 景德鎮全季/桔子酒店 (2晚)：¥400-500 元/間<br>
+          • 南昌全季酒店 (1晚)：¥425-525 元/間<br>
+          💡 華住會會員：享受會員價優惠 10-20%
+        </div>
+        <div class="budget-item">
+          <strong>🍽️ 餐飲費用 (5天)：¥2,250-¥3,000 元</strong><br>
+          • 每人每日：¥150-¥200 元<br>
+          • 3人 × 5天 = ¥2,250-¥3,000 元<br>
+          • 包括：早餐、午餐、晚餐 + 特色美食體驗
+        </div>
+        
+        <h2 style="font-size:20px;color:var(--accent);margin-top:20px">🏨 華住會酒店推薦</h2>
+        <div class="note">
+          <strong>南昌市中心 (1晚 - Day 1)</strong><br>
+          推薦：全季酒店（南昌紅谷灘或市中心店）<br>
+          原因：靠近滕王閣或南昌西站，方便抵達<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥425-525 元/間
+        </div>
+        <div class="note">
+          <strong>景德鎮市中心 (2晚 - Day 2-3)</strong><br>
+          推薦：全季酒店（景德鎮陶溪川店）或桔子酒店（景德鎮雕塑瓷廠店）<br>
+          原因：靠近陶溪川和陶瓷文化區，方便深度體驗藝術和夜市<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥400-500 元/間
+        </div>
+        <div class="note">
+          <strong>南昌市中心 (1晚 - Day 4)</strong><br>
+          推薦：全季酒店（南昌紅谷灘或市中心店）<br>
+          原因：方便 Day 5 早上從南昌西站乘高鐵返回深圳<br>
+          房型：標間或大床房，含早餐<br>
+          會員價：約 ¥425-525 元/間
         </div>
       </div>
     </section>
@@ -298,19 +563,49 @@
 
     (function(){
       document.querySelectorAll('.panel').forEach(panel=>{
-        const tabs = panel.querySelectorAll('.tab');
-        const days = panel.querySelectorAll('.day');
-        tabs.forEach((t,idx)=>{
-          t.addEventListener('click',()=>{
-            tabs.forEach(x=>x.setAttribute('aria-selected','false'));
-            t.setAttribute('aria-selected','true');
-            const day = t.getAttribute('data-day');
-            days.forEach(d=>d.style.display = d.getAttribute('data-day')===day? 'block':'none');
-            t.scrollIntoView({behavior:'smooth',inline:'center'});
+        const tabGroups = panel.querySelectorAll('.tab-group');
+        const dateTabsContainer = panel.querySelector('.date-tabs:first-of-type');
+        
+        // 日期標籤切換
+        if(dateTabsContainer){
+          const dateTabs = dateTabsContainer.querySelectorAll('.tab[data-day]');
+          const days = panel.querySelectorAll('.day');
+          dateTabs.forEach((t,idx)=>{
+            t.addEventListener('click',()=>{
+              dateTabs.forEach(x=>x.setAttribute('aria-selected','false'));
+              t.setAttribute('aria-selected','true');
+              const day = t.getAttribute('data-day');
+              days.forEach(d=>d.style.display = d.getAttribute('data-day')===day? 'block':'none');
+              t.scrollIntoView({behavior:'smooth',inline:'center'});
+            });
+            t.addEventListener('keydown',(e)=>{
+              if(e.key==='ArrowRight') dateTabs[(idx+1)%dateTabs.length].click();
+              if(e.key==='ArrowLeft') dateTabs[(idx-1+dateTabs.length)%dateTabs.length].click();
+            });
           });
-          t.addEventListener('keydown',(e)=>{
-            if(e.key==='ArrowRight') tabs[(idx+1)%tabs.length].click();
-            if(e.key==='ArrowLeft') tabs[(idx-1+tabs.length)%tabs.length].click();
+        }
+        
+        // 分類導覽切換 (行程詳情 vs 交通 & 預算)
+        tabGroups.forEach(group=>{
+          const viewTabs = group.querySelectorAll('.tab[data-view]');
+          viewTabs.forEach(tab=>{
+            tab.addEventListener('click',()=>{
+              const view = tab.getAttribute('data-view');
+              viewTabs.forEach(t=>t.setAttribute('aria-selected','false'));
+              tab.setAttribute('aria-selected','true');
+              
+              // 切換日程和交通預算顯示
+              const dayContent = panel.querySelector('.day-content');
+              const transportSection = panel.querySelector('.transport-section');
+              
+              if(view === 'itinerary'){
+                if(dayContent) dayContent.style.display = 'block';
+                if(transportSection) transportSection.style.display = 'none';
+              } else if(view === 'transport'){
+                if(dayContent) dayContent.style.display = 'none';
+                if(transportSection) transportSection.style.display = 'block';
+              }
+            });
           });
         });
       });
