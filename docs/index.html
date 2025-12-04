@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>行程總覽 — 三方案</title>
+  <!-- PWA / iOS home screen icons -->
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2a6f5d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="行程總覽">
+  <style>
+    :root{--bg:#f7f9fb;--card:#fff;--accent:#2a6f5d;--muted:#6b7280;--radius:14px;--shadow:0 8px 24px rgba(16,24,40,0.06);--min-touch:48px;--tag-orange:#ff8a4b;--tag-green:#3ccf9b;--tag-blue:#5aa6ff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family: -apple-system, BlinkMacSystemFont,'微軟正黑體','Segoe UI',Roboto,Arial;background:var(--bg);color:#071133;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:780px;margin:0 auto;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{font-size:18px;margin:0;color:var(--accent);font-weight:700}
+    p.lead{margin:6px 0 12px;color:var(--muted);font-size:14px}
+
+    /* 三個主按鈕 */
+    .selector{display:flex;gap:8px;margin:8px 0 18px}
+    .sel-btn{flex:1;min-height:var(--min-touch);border-radius:12px;border:0;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#06223a;cursor:pointer}
+    .sel-btn[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+    /* 共用樣式 (日式極簡 卡片) */
+    .panel{display:none}
+    .panel[aria-hidden="false"]{display:block}
+    .date-tabs{display:flex;gap:8px;overflow:auto;padding:8px 0;margin:12px 0}
+    .tab{flex:0 0 auto;padding:8px 12px;border-radius:999px;background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer}
+    .tab[aria-selected="true"]{background:var(--card);box-shadow:var(--shadow);color:var(--accent)}
+
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:12px}
+    .thumb{width:100%;height:128px;border-radius:10px;background:#e7eef6;object-fit:cover}
+    h3{margin:6px 0 0;font-size:16px}
+    p{margin:8px 0;color:var(--muted);font-size:14px}
+    .meta{font-size:13px;color:var(--muted)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{padding:6px 8px;border-radius:10px;color:#fff;font-size:12px}
+    .tag--food{background:var(--tag-orange)}.tag--menu{background:var(--tag-green)}.tag--souvenir{background:var(--tag-blue)}
+
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .btn{flex:1;min-height:44px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:800;cursor:pointer}
+    .small{background:#eef3f2;color:var(--accent)}
+
+    @media (max-width:420px){h1{font-size:16px}.thumb{height:98px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="images/apple-touch-icon.png" alt="App Icon" aria-label="App Icon" style="width:40px;height:40px;border-radius:12px;box-shadow:0 2px 8px #0002;margin-right:10px;vertical-align:middle;" />
+      <h1>行程總覽</h1>
+    </header>
+    <p class="lead">日式極簡 × 手機原生體驗。選擇方案後，使用上方日期標籤切換每天行程。</p>
+
+    <div class="selector" role="tablist" aria-label="選擇行程方案">
+      <button class="sel-btn" id="it-1-btn" aria-pressed="true">張家界 深度探索</button>
+      <button class="sel-btn" id="it-2-btn" aria-pressed="false">長沙＋武漢 文化漫遊</button>
+      <button class="sel-btn" id="it-3-btn" aria-pressed="false">景德鎮＋南昌 藝術之旅</button>
+    </div>
+
+    <!-- Itinerary 1: 張家界 -->
+    <section id="it-1" class="panel" aria-hidden="false">
+      <div class="date-tabs" role="tablist" aria-label="張家界每日行程">
+        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+      </div>
+      <div class="day-content">
+        <div class="day" data-day="1">
+          <article class="card" aria-label="Day1: 交通日">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>Day1 — 交通：深圳 → 張家界</h3>
+            <p class="meta">長途高鐵與轉車，建議預留充足休息時間。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="2" style="display:none">
+          <article class="card" aria-label="Day2: 袁家界" data-highlights="必看:乾坤柱,優惠:門票 60-64 歲半價;65 歲免票">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>袁家界（哈利路亞山 / 乾坤柱）</h3>
+            <p>袁家界屬於武陵源核心景區，砂岩峰林地貌在 3.8 億年前由地殼抬升與流水侵蝕所形成。山峰奇形怪狀，其中著名的「乾坤柱」（哈利路亞山）為好萊塢電影《阿凡達》中懸浮山的原型；「天下第一橋」為兩座山峰之間天然形成的巨大石橋，景觀震撼。</p>
+            <p class="meta">人流：山頂核心觀景平台與百龍天梯排隊人潮多。建議穿舒適鞋並安排充裕休息。</p>
+            <div class="tags"><span class="tag tag--souvenir">乾坤柱</span><span class="tag tag--menu">百龍天梯（無長者優惠）</span></div>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/袁家界','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="3" style="display:none">
+          <article class="card" aria-label="Day3: 天子山 & 金鞭溪" data-highlights="必看:金鞭溪">
+            <h3>天子山與金鞭溪</h3>
+            <p>天子山被譽為「峰林之王」，有御筆峰等著名景觀；金鞭溪兩岸奇峰對峙、水質清澈，溪谷平路徒步路線被稱為「山水畫廊」。金鞭溪徒步時間約 2.5 小時，對長者體能是考驗。</p>
+            <p class="meta">小提示：金鞭溪段相對幽靜，但天子山觀景台、索道站仍有人流集中，建議早點出發避開尖峰時間。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/金鞭溪','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="4" style="display:none">
+          <article class="card" aria-label="Day4: 天門山">
+            <h3>天門山（天門洞、玻璃棧道）</h3>
+            <p>天門山主峰高 1518.6 米，最標誌為天門洞——一個巨大的穿山溶洞，傳說在公元 263 年山壁忽然洞開。山頂的環山棧道與玻璃棧道沿懸崖修築，視野壯觀但對部分遊客具心理挑戰。</p>
+            <p class="meta">注意：索道與天門洞前廣場常有長時間排隊；若同行長者需評估心理接受度與行動能力。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/天門山','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="5" style="display:none">
+          <article class="card" aria-label="Day5: 返回深圳">
+            <h3>返回深圳</h3>
+            <p>乘高鐵返回，交通日。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Itinerary 2: 長沙+武漢 (使用先前製作的設計) -->
+    <section id="it-2" class="panel" aria-hidden="true">
+      <div class="date-tabs" role="tablist" aria-label="長沙+武漢每日行程">
+        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+      </div>
+      <div class="day-content">
+        <div class="day" data-day="1">
+          <article class="card" aria-label="Day1: 嶽麓書院" data-highlights="必看古蹟">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>嶽麓書院</h3>
+            <p>北宋書院，環境幽靜，步行輕鬆。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/嶽麓書院','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="2" style="display:none">
+          <article class="card" aria-label="Day2: 湖南省博物館" data-highlights="必看:馬王堆">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>湖南省博物館（馬王堆）</h3>
+            <p>湖南省博物館以收藏馬王堆漢墓的珍貴文物而聞名，出土文物完整且保存良好，能深入了解西漢時期的生活與禮儀。參觀多為室內展館，可能需要較長時間站立與行走。</p>
+            <p class="meta">建議：安排坐休息與緩慢行程節奏，避免長時間連續站立。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/湖南省博物館','_blank')">導航</button></div>
+          </article>
+          <article class="card" aria-label="Day2: 橘子洲頭">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>橘子洲頭</h3>
+            <p>橘子洲頭因毛澤東早年在此揮毫並寫下《沁園春·長沙》而成名，河岸綠地與雕塑區常聚集遊客與市民，景色富詩意。</p>
+            <p class="meta">建議：若同行長者不便長時間行走，考慮搭乘觀光車或分段漫步。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/橘子洲頭','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="3" style="display:none">
+          <article class="card" aria-label="Day3: 黃鶴樓">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>黃鶴樓</h3>
+            <p>黃鶴樓是江南三大名樓之一，始建於三國時期，因唐代詩人崔顥的詩句而聲名遠播。現存建築為 1980 年代重建，保留古典風格並為欣賞長江景致的制高點。</p>
+            <p class="meta">注意：登樓需爬樓梯；景區有休息平台與電梯可供較不便旅客使用。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/黃鶴樓','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="4" style="display:none">
+          <article class="card" aria-label="Day4: 湖北省博物館">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>湖北省博物館（曾侯乙編鐘）</h3>
+            <p>湖北省博物館收藏大量古楚文化遺物，其中曾侯乙編鐘為重要亮點，為世界上保存最完整的大型青銅樂器之一。博物館展品豐富，適合喜歡歷史文化的旅客。</p>
+            <p class="meta">建議：博物館內人流可能集中，東湖可以選擇環湖觀光車以減少步行負擔。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/湖北省博物館','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="5" style="display:none">
+          <article class="card" aria-label="Day5: 返回深圳">
+            <h3>返回深圳</h3>
+            <p>乘高鐵返回，交通日。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Itinerary 3: 景德鎮+南昌 -->
+    <section id="it-3" class="panel" aria-hidden="true">
+      <div class="date-tabs" role="tablist" aria-label="景德鎮+南昌每日行程">
+        <button class="tab" role="tab" aria-selected="true" data-day="1">第一天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="2">第二天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="3">第三天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="4">第四天</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="5">第五天</button>
+      </div>
+      <div class="day-content">
+        <div class="day" data-day="1">
+          <article class="card" aria-label="Day1: 滕王閣" data-highlights="必看:滕王閣">
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>滕王閣</h3>
+            <p>滕王閣最早建於唐朝永徽四年（公元 653 年），因王勃《滕王閣序》而名垂千古。現存建築依宋代樣式重建，位於贛江邊，風景與文化氣息濃厚。</p>
+            <p class="meta">建議：安排緩步登樓並在觀景平台休息，注意人流高峰時段。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/滕王閣','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="2" style="display:none">
+          <article class="card" aria-label="Day2: 陶溪川" data-highlights="必買:手作陶瓷">
+            <h3>陶溪川文創街區</h3>
+            <p>陶溪川由 1950 年代的宇宙瓷廠改造而成，現為文創聚落，匯集年輕陶藝家與手作市集。每週末夜市活力十足，是觀賞與購買手作的好去處。</p>
+            <div class="tags"><span class="tag tag--souvenir">必買伴手禮</span></div>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/陶溪川','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="3" style="display:none">
+          <article class="card" aria-label="Day3: 古窯博覽區">
+            <h3>景德鎮古窯民俗博覽區</h3>
+            <p>古窯區保留清代鎮窯、明代葫蘆窯等歷代窯爐，展示完整的製瓷流程，從揉泥、拉坯到燒製都能近距離觀察，是體驗「活著的陶瓷歷史」的最佳場所。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/景德鎮古窯','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="4" style="display:none">
+          <article class="card" aria-label="Day4: 江西省博物館">
+            <h3>江西省博物館</h3>
+            <p>江西省博物館收藏大量地方文物，呈現江西在歷史長河中的文化與地位。南昌在近代史上有特殊意義，如八一南昌起義的歷史紀念，博物館適合安排半日深入參觀。</p>
+            <div class="actions"><button class="btn" onclick="window.open('https://www.google.com/maps/search/江西省博物館','_blank')">導航</button></div>
+          </article>
+        </div>
+        <div class="day" data-day="5" style="display:none">
+          <article class="card" aria-label="Day5: 返回深圳">
+            <h3>返回深圳</h3>
+            <p>乘高鐵返回，交通日。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Itinerary switcher
+    (function(){
+      const itBtns = [{id:'it-1-btn',panel:'it-1'},{id:'it-2-btn',panel:'it-2'},{id:'it-3-btn',panel:'it-3'}];
+      itBtns.forEach(({id,panel})=>{
+        const btn = document.getElementById(id);
+        btn.addEventListener('click',()=>{
+          itBtns.forEach(b=>document.getElementById(b.id).setAttribute('aria-pressed', b.id===id?'true':'false'));
+          itBtns.forEach(b=>{document.getElementById(b.panel).setAttribute('aria-hidden', b.panel===panel?'false':'true')});
+          window.scrollTo({top:0,behavior:'smooth'});
+        });
+      });
+    })();
+
+    // Date tabs per itinerary (delegated)
+    (function(){
+      document.querySelectorAll('.panel').forEach(panel=>{
+        const tabs = panel.querySelectorAll('.tab');
+        const days = panel.querySelectorAll('.day');
+        tabs.forEach((t,idx)=>{
+          t.addEventListener('click',()=>{
+            tabs.forEach(x=>x.setAttribute('aria-selected','false'));
+            t.setAttribute('aria-selected','true');
+            const day = t.getAttribute('data-day');
+            days.forEach(d=>d.style.display = d.getAttribute('data-day')===day? 'block':'none');
+            t.scrollIntoView({behavior:'smooth',inline:'center'});
+          });
+          t.addEventListener('keydown',(e)=>{
+            if(e.key==='ArrowRight') tabs[(idx+1)%tabs.length].click();
+            if(e.key==='ArrowLeft') tabs[(idx-1+tabs.length)%tabs.length].click();
+          });
+        });
+      });
+    })();
+
+    // Auto-generate tag highlights from data-highlights
+    (function(){
+      document.querySelectorAll('[data-highlights]').forEach(el=>{
+        const parent = el;
+        const data = parent.getAttribute('data-highlights');
+        if(!data) return;
+        const container = parent.querySelector('.tags') || (function(){const d=document.createElement('div');d.className='tags';parent.appendChild(d);return d;})();
+        data.split(',').map(s=>s.trim()).filter(Boolean).forEach(token=>{
+          const span = document.createElement('span');
+          span.className='tag';
+          if(/必吃|美食|吃/.test(token)) span.classList.add('tag--food');
+          else if(/必點|菜單|菜/.test(token)) span.classList.add('tag--menu');
+          else span.classList.add('tag--souvenir');
+          span.textContent = token;
+          container.appendChild(span);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

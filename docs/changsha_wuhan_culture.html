@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>方案二：長沙+武漢文化漫遊之旅</title>
+    <style>
+        :root{
+            --bg:#f7f9fb;
+            --card:#ffffff;
+            --accent:#3772ff; /* 主色 */
+            --muted:#6b7280;
+            --tag-orange:#ff8a4b;
+            --tag-green:#3ccf9b;
+            --tag-blue:#5aa6ff;
+            --radius:14px;
+            --shadow: 0 6px 18px rgba(16,24,40,0.06);
+            --min-touch:44px;
+        }
+        /* Reset & base */
+        html,body{height:100%;}
+        body{
+            margin:0;font-family: -apple-system, BlinkMacSystemFont, '微軟正黑體', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;line-height:1.45;
+            -webkit-text-size-adjust:100%;
+        }
+        .container{max-width:720px;margin:0 auto;padding:18px 16px 80px;}
+        header{display:flex;align-items:center;gap:12px}
+        h1{font-size:20px;margin:0;color:var(--accent);font-weight:700}
+        p.lead{margin:8px 0 14px;color:var(--muted);font-size:14px}
+
+        /* 日期分頁 (水平滑動) */
+        .date-tabs{display:flex;gap:8px;overflow:auto;padding:8px 0;margin:12px 0 18px;}
+        .tab-btn{flex:0 0 auto;background:transparent;border:0;padding:8px 14px;border-radius:999px;font-weight:600;color:var(--muted);font-size:15px;cursor:pointer}
+        .tab-btn[aria-selected="true"]{background:var(--card);box-shadow:var(--shadow);color:var(--accent)}
+        .tab-btn:focus{outline:3px solid rgba(55,114,255,0.12)}
+
+        /* 卡片 */
+        .day-panel{display:none}
+        .day-panel[aria-hidden="false"]{display:block}
+        .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:12px;}
+        .card .title{display:flex;align-items:center;gap:10px}
+        .card h3{margin:0;font-size:16px}
+        .card p{margin:8px 0;color:var(--muted);font-size:14px}
+        .card .meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+
+        /* 圖片樣式 (如果有) */
+        .thumb{width:100%;height:140px;border-radius:10px;object-fit:cover;background:#eaeef6}
+
+        /* 按鈕 */
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;border:0;font-weight:700;font-size:15px;cursor:pointer}
+        .btn:active{transform:translateY(1px)}
+
+        /* 標籤 (智慧亮顯) */
+        .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+        .tag{font-size:12px;padding:6px 8px;border-radius:10px;color:#fff}
+        .tag--food{background:var(--tag-orange)}
+        .tag--menu{background:var(--tag-green)}
+        .tag--souvenir{background:var(--tag-blue)}
+
+        /* 交通卡 */
+        .transport{display:flex;gap:10px;align-items:center}
+        .transport svg{width:22px;height:22px;flex-shrink:0}
+        .transport .route{font-weight:700}
+
+        /* 可及性與觸控目標 */
+        .tab-btn,.btn{min-height:var(--min-touch);padding-left:14px;padding-right:14px}
+
+        /* 小螢幕微調 */
+        @media (max-width:420px){
+            .thumb{height:110px}
+            .container{padding:14px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>方案二：長沙＋武漢｜文化漫遊</h1>
+        </header>
+        <p class="lead">日式極簡、手機原生體驗設計：清晰字體、柔和色彩、觸控友善的卡片導覽。</p>
+
+        <!-- 日期分頁 -->
+        <div role="tablist" aria-label="每日行程" class="date-tabs">
+            <button class="tab-btn" role="tab" aria-selected="true" aria-controls="day-1" id="tab-1">第一天</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="day-2" id="tab-2">第二天</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="day-3" id="tab-3">第三天</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="day-4" id="tab-4">第四天</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="day-5" id="tab-5">第五天</button>
+        </div>
+
+        <!-- Day 1 -->
+        <section id="day-1" class="day-panel" aria-hidden="false" aria-labelledby="tab-1">
+            <div class="card" role="article" aria-label="Day 1: 嶽麓書院">
+                <img class="thumb" alt="嶽麓書院景觀照片" src="" aria-hidden="true">
+                <div class="title">
+                    <h3>嶽麓書院</h3>
+                </div>
+                <p>中國古代四大書院之一，環境幽靜，適合輕鬆散步與文化參訪。</p>
+                <div class="meta">60 歲以上長者通常有免費或優惠 | 步行強度低</div>
+                <div class="tags" aria-hidden="false">
+                    <span class="tag tag--souvenir">必看古蹟</span>
+                </div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <a class="btn" href="https://www.google.com/maps/search/嶽麓書院" target="_blank" rel="noopener noreferrer" aria-label="導航到嶽麓書院">導航</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 2 -->
+        <section id="day-2" class="day-panel" aria-hidden="true" aria-labelledby="tab-2">
+            <div class="card" role="article" aria-label="Day 2: 湖南省博物館">
+                <img class="thumb" alt="湖南省博物館" src="" aria-hidden="true">
+                <h3>湖南省博物館（馬王堆）</h3>
+                <p>收藏馬王堆漢墓的珍貴文物，室內參觀較多，建議安排坐休息。</p>
+                <div class="meta">參觀可能需要較長站立時間</div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <a class="btn" href="https://www.google.com/maps/search/湖南省博物館" target="_blank" rel="noopener noreferrer">導航</a>
+                </div>
+            </div>
+
+            <div class="card" role="article" aria-label="Day 2: 橘子洲頭">
+                <img class="thumb" alt="橘子洲頭" src="" aria-hidden="true">
+                <h3>橘子洲頭</h3>
+                <p>毛澤東青年時代遊覽並寫下《沁園春·長沙》，河岸風光適合散步。</p>
+                <div class="meta">建議搭乘觀光車減輕步行負擔</div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <a class="btn" href="https://www.google.com/maps/search/橘子洲頭" target="_blank" rel="noopener noreferrer">導航</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 3 -->
+        <section id="day-3" class="day-panel" aria-hidden="true" aria-labelledby="tab-3">
+            <div class="card" role="article" aria-label="Day 3: 黃鶴樓">
+                <img class="thumb" alt="黃鶴樓" src="" aria-hidden="true">
+                <h3>黃鶴樓</h3>
+                <p>江南三大名樓之一，登樓需要較多爬樓梯，但有休息平台與電梯可用。</p>
+                <div class="meta">60 歲以上長者有半價或免票優惠</div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <a class="btn" href="https://www.google.com/maps/search/黃鶴樓" target="_blank" rel="noopener noreferrer">導航</a>
+                </div>
+            </div>
+            <div class="card" role="article" aria-label="Day 3: 長江江灘">
+                <h3>長江江灘</h3>
+                <p>夜晚市民休閒區，適合傍晚散步與欣賞江景。</p>
+            </div>
+        </section>
+
+        <!-- Day 4 -->
+        <section id="day-4" class="day-panel" aria-hidden="true" aria-labelledby="tab-4">
+            <div class="card" role="article" aria-label="Day 4: 湖北省博物館">
+                <img class="thumb" alt="湖北省博物館" src="" aria-hidden="true">
+                <h3>湖北省博物館（曾侯乙編鐘）</h3>
+                <p>收藏古楚文化瑰寶，適合室內參觀，東湖則可搭觀光車減輕步行。</p>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <a class="btn" href="https://www.google.com/maps/search/湖北省博物館" target="_blank" rel="noopener noreferrer">導航</a>
+                </div>
+            </div>
+            <div class="card" role="article" aria-label="Day 4: 東湖">
+                <h3>東湖</h3>
+                <p>中國最大的城中湖，風景優美，建議選擇環湖車或輕鬆步行路線。</p>
+            </div>
+        </section>
+
+        <!-- Day 5 -->
+        <section id="day-5" class="day-panel" aria-hidden="true" aria-labelledby="tab-5">
+            <div class="card" role="article" aria-label="Day 5: 返回深圳">
+                <h3>武漢 → 深圳</h3>
+                <p>交通日：搭乘高鐵返回深圳。建議預留充足車站與安檢時間。</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Tab switching (keyboard + touch friendly)
+        (function(){
+            const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+            const panels = tabs.map(t=>document.getElementById(t.getAttribute('aria-controls')));
+            function activate(index){
+                tabs.forEach((t,i)=>{
+                    const selected = i===index;
+                    t.setAttribute('aria-selected', selected? 'true':'false');
+                    panels[i].setAttribute('aria-hidden', selected? 'false':'true');
+                });
+                // ensure visible
+                tabs[index].scrollIntoView({behavior:'smooth',inline:'center'});
+            }
+            tabs.forEach((t,idx)=>{
+                t.addEventListener('click',()=>activate(idx));
+                t.addEventListener('keydown',(e)=>{
+                    if(e.key==='ArrowRight') activate((idx+1)%tabs.length);
+                    if(e.key==='ArrowLeft') activate((idx-1+tabs.length)%tabs.length);
+                });
+            });
+        })();
+
+        // 智慧亮顯範例：支援 data-highlights 屬性，會自動生成標籤
+        (function(){
+            const articles = document.querySelectorAll('[role="article"]');
+            articles.forEach(a=>{
+                const data = a.dataset.highlights;
+                if(!data) return;
+                const container = a.querySelector('.tags') || (function(){const d=document.createElement('div');d.className='tags';a.appendChild(d);return d;})();
+                data.split(',').map(s=>s.trim()).filter(Boolean).forEach(label=>{
+                    const span=document.createElement('span');
+                    span.className='tag';
+                    // quickly choose color by keyword
+                    if(/美食|吃|必吃/.test(label)) span.classList.add('tag--food');
+                    else if(/菜|菜單|必點/.test(label)) span.classList.add('tag--menu');
+                    else span.classList.add('tag--souvenir');
+                    span.textContent=label;
+                    container.appendChild(span);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
